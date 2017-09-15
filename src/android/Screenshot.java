@@ -64,6 +64,7 @@ public class Screenshot extends CordovaPlugin {
     }
 
     private Bitmap getBitmap() {
+        /*
         Bitmap bitmap = null;
 
         boolean isCrosswalk = false;
@@ -81,8 +82,13 @@ public class Screenshot extends CordovaPlugin {
             bitmap = Bitmap.createBitmap(view.getDrawingCache());
             view.setDrawingCacheEnabled(false);
         }
-
-        return bitmap;
+        */
+       View view = getWindow().getDecorView().getRootView();
+       Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),
+           view.getHeight(), Config.ARGB_8888);
+       Canvas canvas = new Canvas(bitmap);
+       view.draw(canvas);
+       return bitmap;
     }
 
     private void scanPhoto(String imageFileName) {
