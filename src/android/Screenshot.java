@@ -86,7 +86,11 @@ public class Screenshot extends CordovaPlugin {
             view.setDrawingCacheEnabled(false);
         }
         */
-       View view = this.cordova.getActivity().getWindow().getDecorView().getRootView();
+
+       View view = this.cordova.getActivity().getWindow().getView();
+       if (!view.isDrawingCacheEnabled()) {
+         view.setDrawingCacheEnabled(true);
+       }
        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),
            view.getHeight(), Config.ARGB_8888);
        Canvas canvas = new Canvas(bitmap);
